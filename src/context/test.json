@@ -1,0 +1,104 @@
+{
+  "connected_providers": [],
+  "available_providers": [
+    {
+      "id": 7,
+      "provider_title": "Asana",
+      "short_description": null,
+      "small_icon_url": "https://az814671.vo.msecnd.net/logos/asana-194x194.png",
+      "large_icon_url": "https://az814671.vo.msecnd.net/logos/asana-194x194.png",
+      "active": true,
+      "beta": false,
+      "min_version": null,
+      "pre_connect_command": null
+    },
+    {
+      "id": 9,
+      "provider_title": "Basecamp 3",
+      "short_description": null,
+      "small_icon_url": "https://az814671.vo.msecnd.net/logos/basecamp3-128.png",
+      "large_icon_url": "https://az814671.vo.msecnd.net/logos/basecamp3-128.png",
+      "active": true,
+      "beta": false,
+      "min_version": "0.100.0",
+      "pre_connect_command": null
+    },
+    {
+      "id": 10,
+      "provider_title": "Bitbucket",
+      "short_description": null,
+      "small_icon_url": "https://az814671.vo.msecnd.net/logos/Bitbucket-128x128.png",
+      "large_icon_url": "https://az814671.vo.msecnd.net/logos/Bitbucket-128x128.png",
+      "active": true,
+      "beta": false,
+      "min_version": null,
+      "pre_connect_command": null
+    },
+    {
+      "id": 17,
+      "provider_title": "ClickUp",
+      "short_description": null,
+      "small_icon_url": "https://az814671.vo.msecnd.net/logos/clickup-logo-only.svg",
+      "large_icon_url": "https://az814671.vo.msecnd.net/logos/clickup-logo-only.svg",
+      "active": true,
+      "beta": true,
+      "min_version": null,
+      "pre_connect_command": null
+    },
+    {
+      "id": 6,
+      "provider_title": "GitHub",
+      "short_description": null,
+      "small_icon_url": "https://az814671.vo.msecnd.net/logos/GitHub-Mark-Light-32px.png",
+      "large_icon_url": "https://az814671.vo.msecnd.net/logos/GitHub-Mark-Light-120px-plus.png",
+      "active": true,
+      "beta": false,
+      "min_version": "0.99.2",
+      "pre_connect_command": null
+    },
+    {
+      "id": 4,
+      "provider_title": "Google Tasks",
+      "short_description": null,
+      "small_icon_url": "https://az814671.vo.msecnd.net/logos/google-tasks-128.png",
+      "large_icon_url": "https://az814671.vo.msecnd.net/logos/google-tasks-124x124.png",
+      "active": true,
+      "beta": false,
+      "min_version": null,
+      "pre_connect_command": null
+    },
+    {
+      "id": 16,
+      "provider_title": "Microsoft To Do",
+      "short_description": null,
+      "small_icon_url": "https://az814671.vo.msecnd.net/logos/ms-todo-logo.png",
+      "large_icon_url": "https://az814671.vo.msecnd.net/logos/ms-todo-logo.png",
+      "active": true,
+      "beta": false,
+      "min_version": null,
+      "pre_connect_command": null
+    },
+    {
+      "id": 3,
+      "provider_title": "Todoist",
+      "short_description": null,
+      "small_icon_url": "https://az814671.vo.msecnd.net/logos/todoist-128x128.png",
+      "large_icon_url": "https://az814671.vo.msecnd.net/logos/todoist-128x128.png",
+      "active": true,
+      "beta": false,
+      "min_version": null,
+      "pre_connect_command": null
+    },
+    {
+      "id": 5,
+      "provider_title": "Trello",
+      "short_description": null,
+      "small_icon_url": "https://az814671.vo.msecnd.net/logos/trello-blue-128.png",
+      "large_icon_url": "https://az814671.vo.msecnd.net/logos/trello-blue-128.png",
+      "active": true,
+      "beta": false,
+      "min_version": null,
+      "pre_connect_command": null
+    }
+  ]
+}
