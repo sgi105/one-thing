@@ -92,7 +92,6 @@ export default function OneThingButton({
       {(progress === 'DONE' || progress === 'FAILED') && (
         <Button
           variant='outlined'
-          disabled={oneThing === ''}
           sx={{
             width: '150px',
             height: '3rem',
