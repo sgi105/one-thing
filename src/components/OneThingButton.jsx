@@ -2,6 +2,8 @@ import React, { useCallback, useRef } from 'react'
 import ReactCanvasConfetti from 'react-canvas-confetti'
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded'
 import { IconButton, Button } from '@mui/material'
+import axios from 'axios'
+import useLocalStorage from '../hooks/useLocalStorage'
 
 const canvasStyles = {
   position: 'fixed',
@@ -19,6 +21,8 @@ export default function OneThingButton({
   oneThing,
   handleStart,
 }) {
+  const [user, setUser] = useLocalStorage('ONE_THING_USER', null)
+
   // confetti related code
   const refAnimationInstance = useRef(null)
 
@@ -70,6 +74,17 @@ export default function OneThingButton({
   const handleDone = async (e) => {
     fire(e)
     setProgress('DONE')
+    // send server to change the status to 'done'
+
+    const res = await axios.put(
+      process.env.REACT_APP_SERVER_URL + '/onething',
+      {
+        userId: user._id,
+        newStatus: 'done',
+      }
+    )
+
+    console.log(res.data)
   }
 
   const handleReset = () => {

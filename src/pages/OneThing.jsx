@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TextField, Typography, Stack } from '@mui/material'
+import { TextField, Typography, Stack, Button, Menu } from '@mui/material'
 import useLocalStorage from '../hooks/useLocalStorage'
 import { Box } from '@mui/system'
 import DeadlineDiaglog from '../components/DeadlineDiaglog'
@@ -7,8 +7,10 @@ import Timer from '../components/Timer'
 import CongratulationsMessage from '../components/CongratulationsMessage'
 import FailedMessage from '../components/FailedMessage'
 import OneThingButton from '../components/OneThingButton'
+import { useNavigate } from 'react-router-dom'
 
 function OneThing() {
+  const [user, setUser] = useLocalStorage('ONE_THING_USER', null)
   const [progress, setProgress] = useLocalStorage(
     'ONE_THING_PROGRESS',
     'NOT_STARTED'
@@ -17,11 +19,16 @@ function OneThing() {
   const [openDeadlineDialogue, setOpenDeadlineDialogue] = useState(false)
   const [deadline, setDeadline] = useLocalStorage('ONE_THING_DEADLINE', {})
 
+  const navigate = useNavigate()
+
   // possible states: not started, started, done, failed,
 
   const handleStart = () => {
-    setOpenDeadlineDialogue(true)
-    // setDeadline({})
+    if (!user) {
+      navigate('/login')
+    } else {
+      setOpenDeadlineDialogue(true)
+    }
   }
 
   return (
@@ -73,6 +80,7 @@ function OneThing() {
 
       {progress === 'NOT_STARTED' && (
         <DeadlineDiaglog
+          oneThing={oneThing}
           openDeadlineDialogue={openDeadlineDialogue}
           setOpenDeadlineDialogue={setOpenDeadlineDialogue}
           setProgress={setProgress}

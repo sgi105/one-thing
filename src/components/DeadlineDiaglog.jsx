@@ -17,6 +17,8 @@ import {
   convert12HourTo24HourFormat,
   convert24HourTo12HourFormat,
 } from '../utils/utils'
+import axios from 'axios'
+import { LocalConvenienceStoreOutlined } from '@mui/icons-material'
 
 function DeadlineDiaglog({
   openDeadlineDialogue,
@@ -24,12 +26,14 @@ function DeadlineDiaglog({
   setProgress,
   deadline,
   setDeadline,
+  oneThing,
 }) {
   const [hour, setHour] = useState(0)
   const [minute, setMinute] = useState(0)
   const [AMPM, setAMPM] = useState('')
   // const [deadline, setDeadline] = useLocalStorage('ONE_THING_DEADLINE', {})
   const [timeLeftText, setTimeLeftText] = useState('')
+  const [user, setUser] = useLocalStorage('ONE_THING_USER', null)
 
   // set default values for hour, min, AMPM
   useEffect(() => {
@@ -44,7 +48,7 @@ function DeadlineDiaglog({
     setHour(timeIn12HourFormat.hour)
     setMinute(timeIn12HourFormat.minute)
     setAMPM(timeIn12HourFormat.AMPM)
-  }, [])
+  }, [openDeadlineDialogue])
 
   // set deadline
   useEffect(() => {
@@ -105,6 +109,25 @@ function DeadlineDiaglog({
     )
   }
 
+  const handleStart = async () => {
+    setProgress('STARTED')
+    setOpenDeadlineDialogue(false)
+    // when starting, send server current user, start time, deadline
+
+    const res = await axios.post(
+      process.env.REACT_APP_SERVER_URL + '/onething',
+      {
+        userId: user._id,
+        stripeCustomer: user.stripeCustomer,
+        cardInfo: user.cardInfo,
+        startTime: new Date(),
+        deadline,
+        chargeAmount: 500,
+        content: oneThing,
+      }
+    )
+  }
+
   return (
     <Dialog open={openDeadlineDialogue} onClose={handleClose}>
       <Stack
@@ -154,14 +177,7 @@ function DeadlineDiaglog({
           </ToggleButtonGroup>
         </Stack>
         <Typography variant='caption'>{timeLeftText}</Typography>
-        <Button
-          onClick={() => {
-            setProgress('STARTED')
-            setOpenDeadlineDialogue(false)
-          }}
-        >
-          Start
-        </Button>
+        <Button onClick={handleStart}>Start</Button>
       </Stack>
     </Dialog>
   )
