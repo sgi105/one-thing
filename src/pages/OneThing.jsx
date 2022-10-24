@@ -3,11 +3,13 @@ import { TextField, Typography, Stack, Button, Menu } from '@mui/material'
 import useLocalStorage from '../hooks/useLocalStorage'
 import { Box } from '@mui/system'
 import DeadlineDiaglog from '../components/DeadlineDiaglog'
+import PaymentErrorDialog from '../components/PaymentErrorDialog'
 import Timer from '../components/Timer'
 import CongratulationsMessage from '../components/CongratulationsMessage'
 import FailedMessage from '../components/FailedMessage'
 import OneThingButton from '../components/OneThingButton'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 function OneThing() {
   const [user, setUser] = useLocalStorage('ONE_THING_USER', null)
@@ -16,18 +18,44 @@ function OneThing() {
     'NOT_STARTED'
   )
   const [oneThing, setOneThing] = useLocalStorage('ONE_THING_TEXT', '')
-  const [openDeadlineDialogue, setOpenDeadlineDialogue] = useState(false)
+  const [openDeadlineDialog, setOpenDeadlineDialog] = useState(false)
+  const [openPaymentErrorDialog, setOpenPaymentErrorDialog] = useState(false)
   const [deadline, setDeadline] = useLocalStorage('ONE_THING_DEADLINE', {})
+  const [unchargedOneThing, setUnchargedOneThing] = useState(null)
 
   const navigate = useNavigate()
 
   // possible states: not started, started, done, failed,
 
-  const handleStart = () => {
+  // when clicks start,
+  // 1. check if the user is logged in
+  // 2. and check if the user has any unpayed charges.
+  const handleStart = async () => {
     if (!user) {
       navigate('/login')
     } else {
-      setOpenDeadlineDialogue(true)
+      // get onethings by id
+      const res = await axios.get(
+        process.env.REACT_APP_SERVER_URL + `/onethings/${user._id}`
+      )
+
+      const oneThings = res.data
+
+      let unchargedOneThing
+      // check for unpayed charges: paymentError && charged == false
+      oneThings.forEach((elem) => {
+        if (elem.paymentError && elem.charged === false)
+          unchargedOneThing = elem
+      })
+
+      // if there is uncharged onething, set up a dialogue
+      if (unchargedOneThing) {
+        setUnchargedOneThing(unchargedOneThing)
+        setOpenPaymentErrorDialog(true)
+      } else {
+        // open the time setting dialogue
+        setOpenDeadlineDialog(true)
+      }
     }
   }
 
@@ -81,11 +109,18 @@ function OneThing() {
       {progress === 'NOT_STARTED' && (
         <DeadlineDiaglog
           oneThing={oneThing}
-          openDeadlineDialogue={openDeadlineDialogue}
-          setOpenDeadlineDialogue={setOpenDeadlineDialogue}
+          openDeadlineDialog={openDeadlineDialog}
+          setOpenDeadlineDialog={setOpenDeadlineDialog}
           setProgress={setProgress}
           deadline={deadline}
           setDeadline={setDeadline}
+        />
+      )}
+      {openPaymentErrorDialog && (
+        <PaymentErrorDialog
+          openPaymentErrorDialog={openPaymentErrorDialog}
+          setOpenPaymentErrorDialog={setOpenPaymentErrorDialog}
+          unchargedOneThing={unchargedOneThing}
         />
       )}
     </Stack>

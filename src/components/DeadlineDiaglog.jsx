@@ -21,8 +21,8 @@ import axios from 'axios'
 import { LocalConvenienceStoreOutlined } from '@mui/icons-material'
 
 function DeadlineDiaglog({
-  openDeadlineDialogue,
-  setOpenDeadlineDialogue,
+  openDeadlineDialog,
+  setOpenDeadlineDialog,
   setProgress,
   deadline,
   setDeadline,
@@ -48,7 +48,7 @@ function DeadlineDiaglog({
     setHour(timeIn12HourFormat.hour)
     setMinute(timeIn12HourFormat.minute)
     setAMPM(timeIn12HourFormat.AMPM)
-  }, [openDeadlineDialogue])
+  }, [openDeadlineDialog])
 
   // set deadline
   useEffect(() => {
@@ -86,7 +86,7 @@ function DeadlineDiaglog({
   }, [deadline])
 
   const handleClose = () => {
-    setOpenDeadlineDialogue(false)
+    setOpenDeadlineDialog(false)
   }
 
   const minuteSelectionArray = []
@@ -111,7 +111,7 @@ function DeadlineDiaglog({
 
   const handleStart = async () => {
     setProgress('STARTED')
-    setOpenDeadlineDialogue(false)
+    setOpenDeadlineDialog(false)
     // when starting, send server current user, start time, deadline
 
     const res = await axios.post(
@@ -129,7 +129,7 @@ function DeadlineDiaglog({
   }
 
   return (
-    <Dialog open={openDeadlineDialogue} onClose={handleClose}>
+    <Dialog open={openDeadlineDialog} onClose={handleClose}>
       <Stack
         sx={{
           p: 5,
