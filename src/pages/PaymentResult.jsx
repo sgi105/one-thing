@@ -3,6 +3,7 @@ import PaymentStatus from '../components/PaymentStatus'
 import { useEffect } from 'react'
 import axios from 'axios'
 import useLocalStorage from '../hooks/useLocalStorage'
+import { SERVER_URL } from '../utils/constants'
 
 function PaymentResult() {
   const [user, setUser] = useLocalStorage('ONE_THING_USER', null)
@@ -11,8 +12,7 @@ function PaymentResult() {
     const savePaymentMethodToDb = async () => {
       // tell the server to update payment info.
       const res = await axios.get(
-        process.env.REACT_APP_SERVER_URL +
-          `/users/updatepaymentinfo/${user.stripeCustomer.id}`
+        SERVER_URL + `/users/updatepaymentinfo/${user.stripeCustomer.id}`
       )
     }
     savePaymentMethodToDb()

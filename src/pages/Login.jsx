@@ -9,6 +9,7 @@ import useLocalStorage from '../hooks/useLocalStorage'
 import axios from 'axios'
 import { Stack } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { SERVER_URL } from '../utils/constants'
 
 function Login() {
   const [user, setUser] = useLocalStorage('ONE_THING_USER', null)
@@ -20,7 +21,7 @@ function Login() {
     // setUser(jwtDecode(res.credential))
     let token = googleRes.credential
 
-    const res = await axios.post(process.env.REACT_APP_SERVER_URL + '/users', {
+    const res = await axios.post(SERVER_URL + '/users', {
       token,
     })
 

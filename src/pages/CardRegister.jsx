@@ -14,6 +14,7 @@ import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 
 import { STRIPE_KEY } from '../utils/constants'
+import { SERVER_URL } from '../utils/constants'
 
 const stripePromise = loadStripe(STRIPE_KEY)
 
@@ -30,9 +31,7 @@ function Payment() {
   useEffect(() => {
     const getClientSecret = async () => {
       setLoading(true)
-      const res = await axios.get(
-        process.env.REACT_APP_SERVER_URL + '/users/secret' + `/${user._id}`
-      )
+      const res = await axios.get(SERVER_URL + '/users/secret' + `/${user._id}`)
       setClientSecret(res.data.clientSecret)
 
       // update user state only when it's different

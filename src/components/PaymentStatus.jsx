@@ -5,6 +5,7 @@ import { useStripe } from '@stripe/react-stripe-js'
 import { Typography } from '@mui/material'
 import axios from 'axios'
 import useLocalStorage from '../hooks/useLocalStorage'
+import { SERVER_URL } from '../utils/constants'
 
 const PaymentStatus = ({ setInputMode, setLoading }) => {
   const stripe = useStripe()
@@ -42,8 +43,7 @@ const PaymentStatus = ({ setInputMode, setLoading }) => {
             setMessage('Success! Your payment method has been saved.')
             // tell the server to update payment info.
             const res = await axios.get(
-              process.env.REACT_APP_SERVER_URL +
-                `/users/updatepaymentinfo/${user.stripeCustomer.id}`
+              SERVER_URL + `/users/updatepaymentinfo/${user.stripeCustomer.id}`
             )
 
             setUser(res.data.user)

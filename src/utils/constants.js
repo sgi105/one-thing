@@ -9,7 +9,7 @@ const STRIPE_KEY_LIVE =
 
 // SERVER_URL
 const SERVER_URL_TEST = 'http://localhost:8000/api'
-const SERVER_URL_LIVE = 'http://localhost:8000/api'
+const SERVER_URL_LIVE = 'https://onething-server-rafa.herokuapp.com/api'
 
 export const STRIPE_KEY =
   MODE === 'development' ? STRIPE_KEY_TEST : STRIPE_KEY_LIVE

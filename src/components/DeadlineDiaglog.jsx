@@ -19,6 +19,7 @@ import {
 } from '../utils/utils'
 import axios from 'axios'
 import { LocalConvenienceStoreOutlined } from '@mui/icons-material'
+import { SERVER_URL } from '../utils/constants'
 
 function DeadlineDiaglog({
   openDeadlineDialog,
@@ -114,18 +115,15 @@ function DeadlineDiaglog({
     setOpenDeadlineDialog(false)
     // when starting, send server current user, start time, deadline
 
-    const res = await axios.post(
-      process.env.REACT_APP_SERVER_URL + '/onethings',
-      {
-        userId: user._id,
-        stripeCustomer: user.stripeCustomer,
-        cardInfo: user.cardInfo,
-        startTime: new Date(),
-        deadline,
-        chargeAmount: 500,
-        content: oneThing,
-      }
-    )
+    const res = await axios.post(SERVER_URL + '/onethings', {
+      userId: user._id,
+      stripeCustomer: user.stripeCustomer,
+      cardInfo: user.cardInfo,
+      startTime: new Date(),
+      deadline,
+      chargeAmount: 500,
+      content: oneThing,
+    })
   }
 
   return (

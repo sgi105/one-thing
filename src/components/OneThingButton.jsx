@@ -4,6 +4,7 @@ import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlin
 import { IconButton, Button } from '@mui/material'
 import axios from 'axios'
 import useLocalStorage from '../hooks/useLocalStorage'
+import { SERVER_URL } from '../utils/constants'
 
 const canvasStyles = {
   position: 'fixed',
@@ -76,13 +77,10 @@ export default function OneThingButton({
     setProgress('DONE')
     // send server to change the status to 'done'
 
-    const res = await axios.put(
-      process.env.REACT_APP_SERVER_URL + '/onethings',
-      {
-        userId: user._id,
-        newStatus: 'done',
-      }
-    )
+    const res = await axios.put(SERVER_URL + '/onethings', {
+      userId: user._id,
+      newStatus: 'done',
+    })
 
     console.log(res.data)
   }

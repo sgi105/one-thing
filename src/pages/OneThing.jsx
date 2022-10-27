@@ -10,6 +10,7 @@ import FailedMessage from '../components/FailedMessage'
 import OneThingButton from '../components/OneThingButton'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { SERVER_URL } from '../utils/constants'
 
 function OneThing() {
   const [user, setUser] = useLocalStorage('ONE_THING_USER', null)
@@ -40,9 +41,7 @@ function OneThing() {
       // window.open('http://localhost:3000').focus()
 
       // get onethings by id
-      const res = await axios.get(
-        process.env.REACT_APP_SERVER_URL + `/onethings/${user._id}`
-      )
+      const res = await axios.get(SERVER_URL + `/onethings/${user._id}`)
 
       const oneThings = res.data
 
