@@ -115,7 +115,7 @@ function DeadlineDiaglog({
     // when starting, send server current user, start time, deadline
 
     const res = await axios.post(
-      process.env.REACT_APP_SERVER_URL + '/onething',
+      process.env.REACT_APP_SERVER_URL + '/onethings',
       {
         userId: user._id,
         stripeCustomer: user.stripeCustomer,

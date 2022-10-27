@@ -29,7 +29,7 @@ function Profile() {
 
   return (
     <>
-      {user && (
+      {user && user.cardInfo && (
         <Stack spacing={2} alignItems='center'>
           <Avatar
             sx={{ width: 56, height: 56 }}

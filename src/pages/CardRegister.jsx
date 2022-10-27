@@ -12,9 +12,10 @@ import { useNavigate } from 'react-router-dom'
 // Stripe related imports
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
-const stripePromise = loadStripe(
-  'pk_test_51LgiKSBBaTjOoNo9MoH7CmBRT2uagI0LUqJQTKP4qDGlFedXjxJK9npe2Kt9TbtXc0kvbn0NVRS6qJ4mwr0Y4Oph00BVlRwWEH'
-)
+
+import { STRIPE_KEY } from '../utils/constants'
+
+const stripePromise = loadStripe(STRIPE_KEY)
 
 function Payment() {
   const [user, setUser] = useLocalStorage('ONE_THING_USER', null)

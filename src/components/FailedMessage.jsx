@@ -15,7 +15,7 @@ function FailedMessage() {
         If there was a mistake, please send me an{' '}
         <Box
           component='a'
-          href='mailto:onethingsupport@gmail.com?subject=One thing payment mistake'
+          href='mailto:onething.help@gmail.com?subject=One thing payment mistake'
           target='_blank'
           sx={{
             color: 'primary',

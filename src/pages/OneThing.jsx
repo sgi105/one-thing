@@ -34,6 +34,11 @@ function OneThing() {
     if (!user) {
       navigate('/login')
     } else {
+      // test open new tab
+      // console.log(chrome.tabs)
+      // await chrome.tabs.create({})
+      // window.open('http://localhost:3000').focus()
+
       // get onethings by id
       const res = await axios.get(
         process.env.REACT_APP_SERVER_URL + `/onethings/${user._id}`

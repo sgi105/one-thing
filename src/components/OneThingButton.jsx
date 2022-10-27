@@ -77,7 +77,7 @@ export default function OneThingButton({
     // send server to change the status to 'done'
 
     const res = await axios.put(
-      process.env.REACT_APP_SERVER_URL + '/onething',
+      process.env.REACT_APP_SERVER_URL + '/onethings',
       {
         userId: user._id,
         newStatus: 'done',
