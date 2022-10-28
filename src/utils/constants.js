@@ -1,5 +1,7 @@
 // change to production when building for deployment
-const MODE = 'production'
+
+const MODE = 'development'
+// const MODE = 'production'
 
 // STRIPE KEY
 const STRIPE_KEY_TEST =
